@@ -41,10 +41,42 @@
   object-fit: contain;
 }
 
-#searchDiv {
+.searchDiv {
   line-height: 4;
   background-color: lightslategrey;
   padding: 0% 15%;
+}
+
+.contentDiv{
+  padding: 0 15%;
+  border-radius: 10px;
+}
+
+.voteDiv{
+  width: 46%;
+}
+
+.ballotExplainDiv{
+  padding: 2% 5%;
+  background-color: #cedce2;
+  height: 10%;
+  margin: 8% 0;
+}
+
+#noVotingBtn{
+  float: left;
+  margin-right: 1%;
+  height: 50px;
+  background-color: firebrick;
+  color: white;
+}
+
+#yesVotingBtn{
+  float: right;
+  margin-left: 5%;
+  height: 50px;
+  background-color: teal;
+  color: white;
 }
 
 @keyframes App-logo-spin {
