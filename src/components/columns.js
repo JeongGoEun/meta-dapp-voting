@@ -21,10 +21,6 @@ columns.ballotColumns = [
         title: 'Validator Key',
         key: 'validatorKey',
     },
-    {
-        title: 'Ballot time(UTC)',
-        key: 'ballotTime',
-    }
   ]
 
   export { columns }

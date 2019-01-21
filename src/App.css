@@ -60,7 +60,7 @@
   padding: 2% 5%;
   background-color: #cedce2;
   height: 10%;
-  margin: 8% 0;
+  margin: 8% 0 3% 0;
 }
 
 #noVotingBtn{
@@ -77,6 +77,15 @@
   height: 50px;
   background-color: teal;
   color: white;
+}
+
+#finalizeBtn{
+  float: left;
+  cursor: default;
+  background-color: darkgray;
+  border: 0px;
+  color: inherit;
+  width: 10%;
 }
 
 @keyframes App-logo-spin {
