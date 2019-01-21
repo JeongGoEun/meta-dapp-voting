@@ -32,7 +32,7 @@ let getWeb3Instance = () => {
           netId = await web3.eth.net.getId()
           network = await web3.eth.net.getNetworkType()
           console.log('netId: ', netId, ', network: ', network)
-          if (!(netId in constants.NETWORKS)) {
+          if (!(netId in constants.NETWORKS) || network !== 'private') {
             netIdName = 'ERROR'
             errorMsg = 'This is an unknown network.'
             console.log('This is an unknown network.')
@@ -41,8 +41,8 @@ let getWeb3Instance = () => {
             console.log(`This is ${netIdName}`)
           }
           const accounts = await web3.eth.getAccounts()
-  
           defaultAccount = accounts[0] || null
+          
         } else {
           // Fallback to local if no web3 injection.
           console.log('No web3 instance injected, using Local web3.')

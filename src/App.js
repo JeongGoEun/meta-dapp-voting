@@ -1,17 +1,17 @@
-import React from 'react';
-import { Layout, Menu, Button, Input, List, Progress, Row, Col, Modal } from 'antd';
+import React from 'react'
+import { Layout, Menu, Button, Row, Col, Modal } from 'antd'
+import {Votes} from './components/Votes'
 import './App.css';
-import { columns } from './components/columns'
 
 //web3
 import getWeb3Instance from '../src/ethereum/web3'
 
 const { Header, Content, Footer } = Layout;
-const ballotColumns = columns.ballotColumns;
 
 class App extends React.Component {
   state = {
     loadWeb3: false,
+    nav: '1',
   };
 
   constructor (props) {
@@ -27,6 +27,11 @@ class App extends React.Component {
     })
   }
 
+  onMenuClick = ({ key }) => {
+    this.setState({ nav: key })
+    console.log(key)
+  }
+
   getErrModal() {
     return <Modal
       title = 'ERROR'
@@ -36,6 +41,15 @@ class App extends React.Component {
     >
       <p>This is an unknown network.</p>
     </Modal>
+  }
+
+  getContent() {
+    if (!this.state.loadWeb3) return;
+    switch (this.state.nav){
+      case '1': return <Votes title='All'/>
+      case '2': return <Votes title='Active'/>
+      default:
+    }
   }
 
   render() {
@@ -50,6 +64,7 @@ class App extends React.Component {
               mode="horizontal"
               defaultSelectedKeys={['1']}
               style={{ lineHeight: '64px'}}
+              onClick = {this.onMenuClick}
             >
               <Menu.Item key="1">All</Menu.Item>
               <Menu.Item key="2">Active</Menu.Item>
@@ -60,65 +75,14 @@ class App extends React.Component {
         </Header>
 
         <Content>
-        {this.state.loadWeb3 ?
-        <div>
-          <div className='searchDiv'>
-            <Input.Search
-              placeholder="Search"
-              onSearch={value => console.log(value)}
-              enterButton
-            />
-          </div>
-          <div className='contentDiv'>
-            <h1 style={{ padding: '2% 0 0 0' }} > All </h1>
-            <div style={{ background: '#fff', padding: 24, minHeight: 500 }}>
-              <List
-                grid = {{ gutter: 27, column: 6}}
-                dataSource = {ballotColumns}
-                renderItem = { item => (
-                  <List.Item>
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.key}</p>
-                    </div>
-                  </List.Item>
-                )}
-              /><hr></hr>
-
-              <div>
-                <div className='voteDiv' style={{float: 'left'}}>
-                  <Button id='noVotingBtn'>No</Button>
-                  <div style={{float: 'right', width:'85%'}}>
-                    <h4 style={{float: 'right'}} >0 votes</h4>
-                    <Progress percent={30} />
-                  </div>
-                </div>
-                <div className='voteDiv' style={{float: 'right'}}>
-                  <Button id='yesVotingBtn'>Yes</Button>
-                  <div style={{float: 'right', width:'85%'}}>
-                    <h4 style={{float: 'right'}} >0 votes</h4>
-                    <Progress percent={30} />
-                  </div>
-                </div>
-              </div>
-
-              <div className = 'ballotExplainDiv'>
-                <p>>  Minimum {8} from {24} validators are required to pass the proposal</p> <br></br>
-                <p>>  This is a ballot to remove James McGrath from consensus on POA Sokol network. On December 28th, 2018 James requested to be removed from consensus and to remove his responsibilities as a validator. On behalf of all validators we thank James for his service and wish him well on his next endeavors.</p>
-              </div>
-              <div>
-                <Button id = 'finalizeBtn' disabled >Finalized</Button>
-                <h3 style={{float: 'right'}}>Key Ballot ID: {71}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        :<div>{ this.getErrModal() }</div>
+        {this.state.loadWeb3
+        ?<div> {this.getContent()} </div>
+        :<div> { this.getErrModal()} </div>
         }
         </Content>
        
         <Footer style={{ textAlign: 'center'}}>
-          Ant Design ©2018 Created by Ant UED
+          Ant Design ©2018 Created by METADIUM
         </Footer>
       </Layout>
     )
