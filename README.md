@@ -13,7 +13,7 @@ $ npm start
 ```bash
 $ npm run build
 $ npm install -g serve
-$ serve -l 3002 -s build
+$ serve -l 3005 -s build
 ```
 
 ## What more
