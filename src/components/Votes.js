@@ -2,17 +2,19 @@ import React from 'react';
 import { Button, List, Progress } from 'antd';
 import './style/style.css'
 
+
 import { columns } from './columns'
 
 const ballotColumns = columns.ballotColumns;
 
 class Votes extends React.Component {
+
     render() {
         return (
             <div>
                 <div className='contentDiv'>
                     <h1 style={{ padding: '2% 0 0 0' }} > {this.props.title} </h1>
-                    <div style={{ background: '#fff', padding: 24, minHeight: 500 }}>
+                    <div style={{ background: '#fff', padding: 24, minHeight: 300 }}>
                     <List
                         grid = {{ gutter: 27, column: 6}}
                         dataSource = {ballotColumns}

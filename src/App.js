@@ -1,12 +1,16 @@
 import React from 'react'
-import { Layout, Menu, Button, Row, Col, Modal } from 'antd'
-import {Votes} from './components/Votes'
+import { Layout, Button, Row, Col, Modal, Tabs } from 'antd'
+import { Votes } from './components/Votes'
+import { Authority } from './components/Authority'
 import './App.css';
+import logo from './META_Logo_black.svg';
+
 
 //web3
 import getWeb3Instance from '../src/ethereum/web3'
 
 const { Header, Content, Footer } = Layout;
+const TabPane = Tabs.TabPane;
 
 class App extends React.Component {
   state = {
@@ -27,7 +31,7 @@ class App extends React.Component {
     })
   }
 
-  onMenuClick = ({ key }) => {
+  onMenuClick = ( key ) => {
     this.setState({ nav: key })
     console.log(key)
   }
@@ -39,15 +43,15 @@ class App extends React.Component {
       okButtonProps = {{disabled: true}}
       cancelButtonProps = {{disabled: true}}
     >
-      <p>This is an unknown network.</p>
+      <p>This is an unknown network. Please connect to Metadium network</p>
     </Modal>
   }
 
   getContent() {
     if (!this.state.loadWeb3) return;
     switch (this.state.nav){
-      case '1': return <Votes title='All'/>
-      case '2': return <Votes title='Active'/>
+      case '1': return <Authority title='Authority'/>
+      case '2': return <Votes title='Voting'/>
       default:
     }
   }
@@ -55,34 +59,27 @@ class App extends React.Component {
   render() {
     return (
       <Layout className="layout">
-        <Header style={{ padding: '0 15%' }}>
+        <Header style={{ padding: '0 15%', backgroundColor: 'white', borderBottom: 'inset' }}>
           <Row>
-            <Col span={4}><div className="logo" /></Col>
-            <Col offset={15} span={3}>
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              defaultSelectedKeys={['1']}
-              style={{ lineHeight: '64px'}}
-              onClick = {this.onMenuClick}
-            >
-              <Menu.Item key="1">All</Menu.Item>
-              <Menu.Item key="2">Active</Menu.Item>
-            </Menu>
+            <Col span={4}><img src={logo} alt='' width='35%' height='35%' style={{float: 'left'}}/><h3>Governance</h3></Col>
+            <Col offset={16} span={4}>
+            <Tabs defaultActiveKey="1" onChange={this.onMenuClick}>
+              <TabPane tab="Authority" key="1"></TabPane>
+              <TabPane tab="Voting" key="2"></TabPane>
+            </Tabs>
             </Col>
-            <Col span={2}><Button>New Ballot</Button></Col>
           </Row>
         </Header>
 
-        <Content>
+        <Content style={{ backgroundColor: 'white' }}>
         {this.state.loadWeb3
-        ?<div> {this.getContent()} </div>
-        :<div> { this.getErrModal()} </div>
+          ?<div> {this.getContent()} </div>
+          :<div> { this.getErrModal()} </div>
         }
         </Content>
        
         <Footer style={{ textAlign: 'center'}}>
-          Ant Design ©2018 Created by METADIUM
+          Copyright © Since 2018 Metadium Technology, Inc. All rights reserved
         </Footer>
       </Layout>
     )
