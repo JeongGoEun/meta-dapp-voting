@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Button, Row, Col, Modal, Tabs } from 'antd'
-import { Votes } from './components/Votes'
+import { Voting } from './components/Voting'
 import { Authority } from './components/Authority'
 import './App.css';
 import logo from './META_Logo_black.svg';
@@ -15,7 +15,7 @@ const TabPane = Tabs.TabPane;
 class App extends React.Component {
   state = {
     loadWeb3: false,
-    nav: '1',
+    nav: '2',
   };
 
   constructor (props) {
@@ -51,7 +51,7 @@ class App extends React.Component {
     if (!this.state.loadWeb3) return;
     switch (this.state.nav){
       case '1': return <Authority title='Authority'/>
-      case '2': return <Votes title='Voting'/>
+      case '2': return <Voting title='Voting'/>
       default:
     }
   }
@@ -62,7 +62,7 @@ class App extends React.Component {
         <Header style={{ padding: '0 15%', backgroundColor: 'white', borderBottom: 'inset' }}>
           <Row>
             <Col span={4}><img src={logo} alt='' width='35%' height='35%' style={{float: 'left'}}/><h3>Governance</h3></Col>
-            <Col offset={16} span={4}>
+            <Col offset={15} span={5}>
             <Tabs defaultActiveKey="1" onChange={this.onMenuClick}>
               <TabPane tab="Authority" key="1"></TabPane>
               <TabPane tab="Voting" key="2"></TabPane>

@@ -3,29 +3,24 @@ let columns = {}
 columns.ballotColumns = [
     {
         // Ballot creator
-        title: 'Creator',
-        key: 'creator',
+        title: 'Proposal',
+        key: 'proposal',
         value: '',
     },
     {
         // Ballot type
-        title: 'Type',
-        key: 'type',
+        title: 'Proposal Address',
+        key: 'proposalAddr',
         value: '',
     },
     {
-        title: 'Key Type',
-        key: 'keyType',
+        title: 'Topic',
+        key: 'proposalTopic',
         value: '',
     },
     {
-        title: 'Affected Key',
-        key: 'affectedKey',
-        value: '',
-    },
-    {
-        title: 'Validator Key',
-        key: 'validatorKey',
+        title: 'Status',
+        key: 'status',
         value: '',
     },
   ]

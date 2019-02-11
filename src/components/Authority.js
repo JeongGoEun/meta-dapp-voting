@@ -15,7 +15,6 @@ class Authority extends React.Component {
 
     constructor(props) {
         super(props)
-        this.getAuthorityList()
     }
 
     componentWillMount() {
@@ -69,7 +68,7 @@ class Authority extends React.Component {
         return (
             <div>
                 <div className='contentDiv'>
-                    <div><Button id='applyBtn' onClick={this.onApplyBtnClick} style={{margin: '1% 0'}}>Apply for Authority</Button></div>
+                    <div><Button className='apply_proposal_Btn' onClick={this.onApplyBtnClick}>Apply for Authority</Button></div>
                     <div style={{ padding: 20, minHeight: 500 }}>
                         {this.state.getAuthorityInfo
                         ? this.data.authorityItems

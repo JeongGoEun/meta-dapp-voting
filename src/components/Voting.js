@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, List, Progress } from 'antd';
+import { Button, List, Progress, Input } from 'antd';
 import './style/style.css'
 
 
@@ -7,27 +7,35 @@ import { columns } from './columns'
 
 const ballotColumns = columns.ballotColumns;
 
-class Votes extends React.Component {
+class Voting extends React.Component {
 
     render() {
         return (
             <div>
                 <div className='contentDiv'>
-                    <h1 style={{ padding: '2% 0 0 0' }} > {this.props.title} </h1>
+                    <div>
+                        <Input.Search
+                            placeholder="Search by Type, Proposal, Keywords"
+                            onSearch={value => console.log(value)}
+                            enterButton
+                            style={{width: '70%', margin: '1% 0 1% 1.5%'}}
+                        />
+                        <Button className='apply_proposal_Btn'>New Proposal</Button>
+                    </div>
                     <div style={{ background: '#fff', padding: 24, minHeight: 300 }}>
-                    <List
-                        grid = {{ gutter: 27, column: 6}}
-                        dataSource = {ballotColumns}
-                        renderItem = { item => (
-                        <List.Item>
-                            <div>
-                            <h3>{item.title}</h3>
-                            <p>{item.key}</p>
-                            </div>
-                        </List.Item>
-                        )}
-                    /><hr></hr>
-
+                        <List
+                            className='votingItemList'
+                            grid = {{ gutter: 27, column: 4}}
+                            dataSource = {ballotColumns}
+                            renderItem = { item => (
+                            <List.Item>
+                                <div>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.key}</p>
+                                </div>
+                            </List.Item>
+                            )}
+                        />
                     <div>
                         <div className='voteDiv' style={{float: 'left'}}>
                         <Button id='noVotingBtn'>No</Button>
@@ -59,4 +67,4 @@ class Votes extends React.Component {
         )
     }
 }
-export { Votes }
+export { Voting }
